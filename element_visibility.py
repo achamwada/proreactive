@@ -1,9 +1,14 @@
 import time
 from utilities.pretty_debug import pretty_debug as debug
-# Class to search for element visibility
+
+
+"""
+Class to search for element visibility
+using a selenium browser passed in as an argument 
+"""
 class element_visibility():
 
-    def __init__(self,browser, command, type='xpath', action='GetText', times=30, clear_popups_xpath=False,ajax=False, classfunc=False):
+    def __init__(self, browser, command, type='xpath', action='GetText', times=30, clear_popups_xpath=False,ajax=False, classfunc=False):
 
         # Initialize class variables
         self.iterator_count = 1
@@ -24,14 +29,18 @@ class element_visibility():
         while(self.iterator_count <= self.iteration_limit):
 
             if(self.clear_popups):
+
                 try:
+
                     self.browser.find_element_by_xpath("{}".format(self.clear_popups)).click()
                     debug("Popup cleared")
+
                 except Exception as p:
                     debug(self.clear_popups)
                     debug("Popup not cleared {}".format(p))
 
             if(self.classFunc):
+
                 try:
                     self.classFunc(self.browser)
                 except Exception as t:
